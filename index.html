@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>എന്റെ കേരളം - ടൂറിസം ഗൈഡ്</title>
+    <title>എന്റെ കേരളം - ദൈവത്തിന്റെ സ്വന്തം നാട്</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&display=swap');
 
@@ -25,7 +25,7 @@
             align-items: center;
         }
 
-        /* ഹെഡർ - ലിക്വിഡ് ഗ്ലാസ് */
+        /* ഹെഡർ - ലിക്വിഡ് ഗ്ലാസ് UI */
         header {
             width: 100%;
             max-width: 1100px;
@@ -44,6 +44,7 @@
             font-size: 2.8rem;
             color: #4ade80;
             text-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+            margin-bottom: 5px;
         }
 
         header p {
@@ -57,7 +58,7 @@
             max-width: 1100px;
         }
 
-        /* കേരളത്തെക്കുറിച്ചുള്ള ആമുഖം */
+        /* വിവരണം */
         .intro-box {
             background: rgba(6, 44, 25, 0.4);
             backdrop-filter: blur(15px);
@@ -77,7 +78,6 @@
             display: inline-block;
         }
 
-        /* സെക്ഷൻ ടൈറ്റിൽ */
         .section-title {
             color: #4ade80;
             font-size: 1.8rem;
@@ -85,10 +85,10 @@
             text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
-        /* നാല് ഫോട്ടോകളുടെ ഗാലറി */
+        /* പ്രധാന ഗാലറി കാർഡുകൾ */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
@@ -101,7 +101,7 @@
             border-radius: 20px;
             padding: 12px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .photo-card:hover {
@@ -112,13 +112,18 @@
 
         .photo-card img {
             width: 100%;
-            height: 180px;
+            height: 200px;
             object-fit: cover;
             border-radius: 12px;
             margin-bottom: 10px;
         }
 
-        /* പ്രധാന വിനോദസഞ്ചാര കേന്ദ്രങ്ങളുടെ ഗ്രിഡ് */
+        .photo-card p {
+            font-weight: bold;
+            color: #86efac;
+        }
+
+        /* പ്രധാന സ്ഥലങ്ങൾ ഗ്രിഡ് */
         .destinations-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -132,7 +137,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: 20px;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease, background 0.2s ease;
         }
 
         .dest-card:hover {
@@ -145,9 +150,6 @@
             color: #86efac;
             font-size: 1.4rem;
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .dest-card p {
@@ -181,78 +183,65 @@
 
     <header>
         <h1>എന്റെ കേരളം ടൂറിസം</h1>
-        <p>ദൈവത്തിന്റെ സ്വന്തം നാട്ടിലെ കാഴ്ചകളിലേക്ക് ഒരെത്തിനോട്ടം</p>
+        <p>ദൈവത്തിന്റെ സ്വന്തം നാട്ടിലെ മനോഹര കാഴ്ചകളിലേക്ക് സ്വാഗതം</p>
     </header>
 
     <div class="container">
         
-        <!-- ആമുഖം -->
         <div class="intro-box">
-            <h2>കേരളത്തിന്റെ ഭംഗിയും തനിമയും</h2>
+            <h2>കേരളത്തിന്റെ തനിമയും മനോഹാരിതയും</h2>
             <p>
-                പ്രകൃതിയുടെ മനോഹരമായ പച്ചപ്പും, നിശ്ചലമായ കായലുകളും, മനസ്സിന് ശാന്തത നൽകുന്ന മലനിരകളും നിറഞ്ഞതാണ് കേരളം. തനതായ സംസ്‌കാരവും, ലോകപ്രശസ്തമായ ആയുർവേദവും, നാടൻ രുചികളും ചേരുമ്പോൾ കേരളമെന്ന അനുഭവം പൂർണ്ണമാകുന്നു.
+                നിബിഡവനങ്ങളും, ശാന്തമായ കായലുകളും, നീളമേറിയ കടൽത്തീരങ്ങളും കൊണ്ട് അനുഗ്രഹീതമാണ് കേരളം. പരമ്പരാഗത സംസ്കാരവും പ്രകൃതിഭംഗിയും കോർത്തിണക്കിയ ഈ മണ്ണ് ഏതൊരു സഞ്ചാരിക്കും ഒരു പുതിയ അനുഭവമാണ് നൽകുന്നത്.
             </p>
         </div>
 
-        <!-- നിങ്ങൾ തന്ന ഫോട്ടോകൾ -->
-        <h2 class="section-title">ചിത്ര ഗാലറി</h2>
+        <!-- നിങ്ങൾ തന്ന 4 ചിത്രങ്ങളുടെ ഗാലറി -->
+        <h2 class="section-title">കേരളീയ കാഴ്ചകൾ</h2>
         <div class="gallery-grid">
             <div class="photo-card">
-                <img src="https://ibb.co/DDfK1QtZ" alt="കാഴ്ച 1" onerror="this.src='https://via.placeholder.com/300x200/08331d/ffffff?text=Kerala+1'">
-                <p>കേരളീയ ദൃശ്യം 1</p>
+                <img src="https://i.ibb.co/DDfK1QtZ/image.jpg" alt="കേരള കാഴ്ച 1" onerror="this.src='https://ibb.co/DDfK1QtZ'">
+                <p>കേരളീയ ഭംഗി - കാഴ്ച 1</p>
             </div>
             <div class="photo-card">
-                <img src="https://ibb.co/JjF6ZPfq" alt="കാഴ്ച 2" onerror="this.src='https://via.placeholder.com/300x200/08331d/ffffff?text=Kerala+2'">
-                <p>കേരളീയ ദൃശ്യം 2</p>
+                <img src="https://i.ibb.co/JjF6ZPfq/image.jpg" alt="കേരള കാഴ്ച 2" onerror="this.src='https://ibb.co/JjF6ZPfq'">
+                <p>കേരളീയ ഭംഗി - കാഴ്ച 2</p>
             </div>
             <div class="photo-card">
-                <img src="https://ibb.co/nNb4g2yB" alt="കാഴ്ച 3" onerror="this.src='https://via.placeholder.com/300x200/08331d/ffffff?text=Kerala+3'">
-                <p>കേരളീയ ദൃശ്യം 3</p>
+                <img src="https://i.ibb.co/nNb4g2yB/image.jpg" alt="കേരള കാഴ്ച 3" onerror="this.src='https://ibb.co/nNb4g2yB'">
+                <p>കേരളീയ ഭംഗി - കാഴ്ച 3</p>
             </div>
             <div class="photo-card">
-                <img src="https://ibb.co/gFLWxpQG" alt="കാഴ്ച 4" onerror="this.src='https://via.placeholder.com/300x200/08331d/ffffff?text=Kerala+4'">
-                <p>കേരളീയ ദൃശ്യം 4</p>
+                <img src="https://i.ibb.co/gFLWxpQG/image.jpg" alt="കേരള കാഴ്ച 4" onerror="this.src='https://ibb.co/gFLWxpQG'">
+                <p>കേരളീയ ഭംഗി - കാഴ്ച 4</p>
             </div>
         </div>
 
-        <!-- പ്രധാന സഞ്ചാര കേന്ദ്രങ്ങൾ -->
-        <h2 class="section-title">പ്രധാന കാഴ്ചകളും കേന്ദ്രങ്ങളും</h2>
+        <!-- ടൂറിസ്റ്റ് കേന്ദ്രങ്ങൾ -->
+        <h2 class="section-title">പ്രധാന വിനോദസഞ്ചാര കേന്ദ്രങ്ങൾ</h2>
         <div class="destinations-grid">
             
             <div class="dest-card">
-                <h3>🚣 ആലപ്പുഴ (Alappuzha)</h3>
-                <p>കേരളത്തിന്റെ 'വെനീസ്' എന്നറിയപ്പെടുന്ന ആലപ്പുഴ ഹൗസ് ബോട്ട് യാത്രകൾക്കും കെട്ടുവള്ളങ്ങൾക്കും സുന്ദരമായ കായൽ ദൃശ്യങ്ങൾക്കും പ്രശസ്തമാണ്.</p>
+                <h3>🚣 ആലപ്പുഴ</h3>
+                <p>കായൽ പരപ്പിലൂടെയുള്ള ഹൗസ്‌ബോട്ട് യാത്രകളും, ശാന്തമായ അന്തരീക്ഷവും ആലപ്പുഴയെ ലോകപ്രശസ്തമാക്കുന്നു.</p>
                 <span class="tag">കായൽ ടൂറിസം</span>
             </div>
 
             <div class="dest-card">
-                <h3>🍃 മൂന്നാർ (Munnar)</h3>
-                <p>മഞ്ഞുമൂടിയ മലനിരകളും വിശാലമായ തേയിലത്തോട്ടങ്ങളും തണുത്ത കാലാവസ്ഥയും നിറഞ്ഞ തെക്കേ ഇന്ത്യയിലെ ഏറ്റവും വലിയ ഹിൽ സ്റ്റേഷൻ.</p>
+                <h3>🍃 മൂന്നാർ</h3>
+                <p>മഞ്ഞുമൂടിയ മലനിരകളും തേയിലത്തോട്ടങ്ങളും തണുത്ത കാലാവസ്ഥയും നിറഞ്ഞ ദൈവത്തിന്റെ നാടൻ ഹിൽ സ്റ്റേഷൻ.</p>
                 <span class="tag">ഹിൽ സ്റ്റേഷൻ</span>
             </div>
 
             <div class="dest-card">
-                <h3>🐘 വയനാട് & തേക്കടി (Wayanad & Thekkady)</h3>
-                <p>പെരിയാർ വന്യജീവി സങ്കേതവും, ബാണാസുര സാഗർ അണക്കെട്ടും, കാടുകളുടെ വന്യതയും കാടിന്റെ പച്ചപ്പും ആസ്വദിക്കാൻ പറ്റിയ ഒരിടം.</p>
-                <span class="tag">വൈൽഡ് ലൈഫ് & ട്രെക്കിംഗ്</span>
+                <h3>🐘 വയനാട്</h3>
+                <p>വന്യജീവി സങ്കേതങ്ങളും, ഗുഹകളും, പച്ചപ്പുനിറഞ്ഞ കുന്നുകളും നിറഞ്ഞ അഡ്വഞ്ചർ ടൂറിസത്തിന് അനുയോജ്യമായ സ്ഥലം.</p>
+                <span class="tag">വൈൽഡ് ലൈഫ്</span>
             </div>
 
             <div class="dest-card">
-                <h3>🏖️ കോവളം & വർക്കല (Kovalam & Varkala)</h3>
-                <p>വർക്കലയിലെ മനോഹരമായ കുന്നിൻചെരിവുകളും (Cliffs), കോവളത്തെ നീളമേറിയ കടൽത്തീരങ്ങളും സൂര്യാസ്തമയ കാഴ്ചകൾക്ക് അനുയോജ്യമാണ്.</p>
+                <h3>🏖️ വർക്കല & കോവളം</h3>
+                <p>സൂര്യാസ്തമയം കാണാനും കടൽത്തീരത്ത് ചിലവഴിക്കാനും അനുയോജ്യമായ ലോകോത്തര ബീച്ചുകൾ.</p>
                 <span class="tag">ബീച്ച് ടൂറിസം</span>
-            </div>
-
-            <div class="dest-card">
-                <h3>🏛️ ഫോർട്ട് കൊച്ചി (Fort Kochi)</h3>
-                <p>ചൈനീസ് വലകളും (Chinese Fishing Nets), പൗരാണിക തെരുവുകളും, വൈവിധ്യമാർന്ന സംസ്‌കാരവും കലയും ഒത്തുചേരുന്ന ചരിത്രപരമായ നഗരം.</p>
-                <span class="tag">ഹെറിറ്റേജ് & സംസ്കാരം</span>
-            </div>
-
-            <div class="dest-card">
-                <h3>🌊 അﺜിരപ്പിള്ളി (Athirappilly)</h3>
-                <p>കേരളത്തിന്റെ 'നയാഗ്ര' എന്നറിയപ്പെടുന്ന മനോഹരമായ വെള്ളച്ചാട്ടം. പ്രകൃതിസ്‌നേഹികൾക്കും സിനിമാ ചിത്രീകരണങ്ങൾക്കും ഏറെ പ്രിയപ്പെട്ട സ്ഥലം.</p>
-                <span class="tag">വെള്ളച്ചാട്ടം</span>
             </div>
 
         </div>

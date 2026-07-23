@@ -3,236 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEAM REXO | Categorized Admin Panel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>TEAM REXO | Admin Control Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #0b0c10; color: #fff; }
-        .glass { background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(18px); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #060709; color: #f1f5f9; padding: 20px; font-size: 0.88rem; }
         
-        .login-box { max-width: 400px; margin: 100px auto; padding: 30px; text-align: center; }
-        .login-box input { width: 100%; padding: 12px; margin: 10px 0; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: #fff; }
-        .btn { padding: 10px 20px; border: none; border-radius: 8px; background: linear-gradient(45deg, #00f0ff, #7000ff); color: #fff; font-weight: 600; cursor: pointer; }
+        .admin-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            max-width: 1000px;
+            margin: 0 auto 30px auto;
+        }
 
-        .dashboard { display: none; padding: 20px; max-width: 1200px; margin: 0 auto; }
-        .sidebar-menu { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .menu-btn { padding: 10px 15px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); color: #fff; cursor: pointer; border-radius: 6px; }
-        .menu-btn.active { background: #00f0ff; color: #000; font-weight: bold; }
+        h2 { font-family: 'Rajdhani', sans-serif; color: #00f0ff; letter-spacing: 1px; margin-bottom: 15px; font-size: 1.5rem; }
+        h3 { font-family: 'Rajdhani', sans-serif; color: #7000ff; margin-top: 15px; margin-bottom: 10px; font-size: 1.2rem; }
 
-        .panel-section { display: none; padding: 20px; }
-        .panel-section.active { display: block; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 15px; }
+        input {
+            width: 100%;
+            padding: 9px 12px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        input:focus { outline: none; border-color: #00f0ff; }
 
-        input, select { width: 100%; padding: 10px; margin: 5px 0 15px 0; background: rgba(11, 12, 16, 0.8); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #fff; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid rgba(255,255,255,0.1); padding: 10px; text-align: left; font-size: 0.85rem; }
-        th { background: rgba(0, 240, 255, 0.2); }
+        .btn {
+            padding: 9px 18px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #00f0ff, #7000ff);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn-danger { background: linear-gradient(135deg, #ff0055, #990000); }
+
+        /* Table Styling */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; }
+        th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; }
+        th { color: #00f0ff; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; }
+        tr:hover { background: rgba(255,255,255,0.02); }
     </style>
 </head>
 <body>
 
-    <!-- Login Form -->
-    <div id="login-container" class="login-box glass">
-        <h2 style="font-family: 'Orbitron'; color: #00f0ff; margin-bottom: 20px;">ADMIN LOGIN</h2>
-        <input type="text" id="adminUser" placeholder="Username">
-        <input type="password" id="adminPass" placeholder="Password">
-        <button class="btn" onclick="login()" style="width: 100%;">LOGIN</button>
+    <!-- Site Management -->
+    <div class="admin-card">
+        <h2>⚡ TEAM REXO ADMIN CONTROL PANEL</h2>
+        
+        <h3>1. Update Logo & Group Link</h3>
+        <div class="form-grid">
+            <input type="text" id="cfg-logo" placeholder="Logo Image URL">
+            <input type="text" id="cfg-group" placeholder="Instagram Group Link">
+        </div>
+
+        <h3>2. Guild Leadership Links</h3>
+        <p style="color:#64748b; margin-bottom:8px; font-size:0.75rem;">Leader Details</p>
+        <div class="form-grid">
+            <input type="text" id="lead-name" placeholder="Leader Name">
+            <input type="text" id="lead-uid" placeholder="Leader UID">
+            <input type="text" id="lead-dm" placeholder="Leader Insta DM Link">
+        </div>
+
+        <p style="color:#64748b; margin-bottom:8px; font-size:0.75rem;">Acting Leader Details</p>
+        <div class="form-grid">
+            <input type="text" id="act-name" placeholder="Acting Name">
+            <input type="text" id="act-uid" placeholder="Acting UID">
+            <input type="text" id="act-dm" placeholder="Acting Insta DM Link">
+        </div>
+
+        <p style="color:#64748b; margin-bottom:8px; font-size:0.75rem;">Officer / Elder Details</p>
+        <div class="form-grid">
+            <input type="text" id="eld-name" placeholder="Elder Name">
+            <input type="text" id="eld-uid" placeholder="Elder UID">
+            <input type="text" id="eld-dm" placeholder="Elder Insta DM Link">
+        </div>
+
+        <button class="btn" onclick="saveAdminData()">SAVE WEBSITE CHANGES</button>
     </div>
 
-    <!-- Admin Dashboard -->
-    <div id="dashboard-container" class="dashboard">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h1 style="font-family: 'Orbitron'; color: #00f0ff;">REXO CONTROL PANEL</h1>
-            <button class="btn" onclick="logout()" style="background: red;">LOGOUT</button>
+    <!-- Application Logs & Visitor Tracking -->
+    <div class="admin-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>📋 JOIN APPLICATIONS & VISITOR LOGS</h2>
+            <button class="btn btn-danger" onclick="clearLogs()">CLEAR ALL LOGS</button>
         </div>
 
-        <div class="sidebar-menu">
-            <button class="menu-btn active" onclick="switchTab('branding')">Logo & Settings</button>
-            <button class="menu-btn" onclick="switchTab('leadership')">Leadership Links</button>
-            <button class="menu-btn" onclick="switchTab('roster')">Categorized Roster</button>
-            <button class="menu-btn" onclick="switchTab('logs')">Join Requests & IP Logs</button>
-        </div>
-
-        <!-- Branding & Logo -->
-        <div id="branding" class="panel-section glass active">
-            <h3>Website Branding</h3>
-            <label>Logo Image URL:</label>
-            <input type="text" id="cfg-logo">
-            <label>Instagram Group Link:</label>
-            <input type="text" id="cfg-group">
-            <button class="btn" onclick="saveSettings()">Save Branding</button>
-        </div>
-
-        <!-- Leadership Setup -->
-        <div id="leadership" class="panel-section glass">
-            <h3>Leader Settings</h3>
-            <input type="text" id="l-name" placeholder="Leader Name">
-            <input type="text" id="l-uid" placeholder="Leader UID">
-            <input type="text" id="l-dm" placeholder="Leader Insta DM Link">
-
-            <h3>Acting Leader Settings</h3>
-            <input type="text" id="a-name" placeholder="Acting Leader Name">
-            <input type="text" id="a-uid" placeholder="Acting Leader UID">
-            <input type="text" id="a-dm" placeholder="Acting Leader Insta DM Link">
-
-            <h3>Elder Settings</h3>
-            <input type="text" id="e-name" placeholder="Elder Name">
-            <input type="text" id="e-uid" placeholder="Elder UID">
-            <input type="text" id="e-dm" placeholder="Elder Insta DM Link">
-
-            <button class="btn" onclick="saveLeadership()">Save Leadership Info</button>
-        </div>
-
-        <!-- Categorized Roster Manager -->
-        <div id="roster" class="panel-section glass">
-            <h3>Categorized 60 Players Roster</h3>
-            
-            <!-- Category Dropdown Filter for Easy Editing -->
-            <label style="color: #00f0ff; font-weight: bold;">Select Category/Squad to Edit:</label>
-            <select id="squadSelector" onchange="renderCategorizedRosterInputs()">
-                <option value="squad1">Squad 1 (Players 1 to 15)</option>
-                <option value="squad2">Squad 2 (Players 16 to 30)</option>
-                <option value="squad3">Squad 3 (Players 31 to 45)</option>
-                <option value="squad4">Squad 4 (Players 46 to 60)</option>
-            </select>
-
-            <div id="roster-inputs" style="margin-top: 15px;">
-                <!-- Dynamically loaded based on selected squad -->
-            </div>
-            <button class="btn" onclick="saveRoster()" style="margin-top: 15px;">Save All Roster Changes</button>
-        </div>
-
-        <!-- IP Logs & Join Requests -->
-        <div id="logs" class="panel-section glass">
-            <h3>Join Applications & Visitor IP Logs</h3>
-            <table id="logTable">
+        <div style="overflow-x: auto;">
+            <table>
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Name</th>
-                        <th>UID</th>
-                        <th>Phone</th>
+                        <th>Date/Time</th>
+                        <th>Player Name</th>
+                        <th>FF UID</th>
+                        <th>Email</th>
+                        <th>Instagram Handle</th>
                         <th>IP Address</th>
-                        <th>ISP Provider</th>
+                        <th>ISP/Network</th>
                     </tr>
                 </thead>
-                <tbody id="logBody"></tbody>
+                <tbody id="logs-table-body">
+                    <!-- Logs injected via JS -->
+                </tbody>
             </table>
         </div>
     </div>
 
     <script>
-        let fullRosterData = [];
-
-        function login() {
-            const u = document.getElementById('adminUser').value;
-            const p = document.getElementById('adminPass').value;
-            if(u === 'admin' && p === 'rexo123') {
-                document.getElementById('login-container').style.display = 'none';
-                document.getElementById('dashboard-container').style.display = 'block';
-                loadAdminData();
-            } else {
-                alert('Invalid Username/Password');
-            }
-        }
-
-        function logout() { location.reload(); }
-
-        function switchTab(tabId) {
-            document.querySelectorAll('.panel-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.menu-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
-        }
-
-        function loadAdminData() {
+        function loadCurrentAdminData() {
             const data = JSON.parse(localStorage.getItem('rexoData')) || {};
             if(data.logo) document.getElementById('cfg-logo').value = data.logo;
             if(data.instaGroup) document.getElementById('cfg-group').value = data.instaGroup;
 
             if(data.leadership) {
-                document.getElementById('l-name').value = data.leadership.leader.name;
-                document.getElementById('l-uid').value = data.leadership.leader.uid;
-                document.getElementById('l-dm').value = data.leadership.leader.dm;
+                document.getElementById('lead-name').value = data.leadership.leader.name || '';
+                document.getElementById('lead-uid').value = data.leadership.leader.uid || '';
+                document.getElementById('lead-dm').value = data.leadership.leader.dm || '';
 
-                document.getElementById('a-name').value = data.leadership.acting.name;
-                document.getElementById('a-uid').value = data.leadership.acting.uid;
-                document.getElementById('a-dm').value = data.leadership.acting.dm;
+                document.getElementById('act-name').value = data.leadership.acting.name || '';
+                document.getElementById('act-uid').value = data.leadership.acting.uid || '';
+                document.getElementById('act-dm').value = data.leadership.acting.dm || '';
 
-                document.getElementById('e-name').value = data.leadership.elder.name;
-                document.getElementById('e-uid').value = data.leadership.elder.uid;
-                document.getElementById('e-dm').value = data.leadership.elder.dm;
+                document.getElementById('eld-name').value = data.leadership.elder.name || '';
+                document.getElementById('eld-uid').value = data.leadership.elder.uid || '';
+                document.getElementById('eld-dm').value = data.leadership.elder.dm || '';
             }
 
-            fullRosterData = data.roster || Array.from({ length: 60 }, (_, i) => ({
-                name: `REXO Player ${i + 1}`,
-                uid: `UID${10000 + i}`,
-                category: i < 15 ? 'squad1' : i < 30 ? 'squad2' : i < 45 ? 'squad3' : 'squad4'
-            }));
-
-            renderCategorizedRosterInputs();
-
-            // Logs
-            const logs = JSON.parse(localStorage.getItem('rexoLogs')) || [];
-            const logBody = document.getElementById('logBody');
-            logBody.innerHTML = '';
-            logs.forEach(l => {
-                logBody.innerHTML += `<tr><td>${l.date}</td><td>${l.name}</td><td>${l.uid}</td><td>${l.phone}</td><td>${l.ip}</td><td>${l.isp}</td></tr>`;
-            });
+            renderLogs();
         }
 
-        function renderCategorizedRosterInputs() {
-            const selectedSquad = document.getElementById('squadSelector').value;
-            const container = document.getElementById('roster-inputs');
-            container.innerHTML = '';
+        function saveAdminData() {
+            const currentData = JSON.parse(localStorage.getItem('rexoData')) || {};
 
-            fullRosterData.forEach((p, index) => {
-                if(p.category === selectedSquad) {
-                    container.innerHTML += `
-                        <div style="display:flex; gap:10px; align-items:center; margin-bottom:10px;" class="glass" style="padding:10px;">
-                            <span style="color:#00f0ff; font-weight:bold; width:40px;">#${index+1}</span>
-                            <input type="text" value="${p.name}" id="r-name-${index}" placeholder="Player Name" style="margin:0;">
-                            <input type="text" value="${p.uid}" id="r-uid-${index}" placeholder="FF UID" style="margin:0;">
-                        </div>
-                    `;
+            currentData.logo = document.getElementById('cfg-logo').value;
+            currentData.instaGroup = document.getElementById('cfg-group').value;
+
+            currentData.leadership = {
+                leader: {
+                    name: document.getElementById('lead-name').value,
+                    uid: document.getElementById('lead-uid').value,
+                    dm: document.getElementById('lead-dm').value
+                },
+                acting: {
+                    name: document.getElementById('act-name').value,
+                    uid: document.getElementById('act-uid').value,
+                    dm: document.getElementById('act-dm').value
+                },
+                elder: {
+                    name: document.getElementById('eld-name').value,
+                    uid: document.getElementById('eld-uid').value,
+                    dm: document.getElementById('eld-dm').value
                 }
-            });
-        }
-
-        function saveSettings() {
-            let data = JSON.parse(localStorage.getItem('rexoData')) || {};
-            data.logo = document.getElementById('cfg-logo').value;
-            data.instaGroup = document.getElementById('cfg-group').value;
-            localStorage.setItem('rexoData', JSON.stringify(data));
-            alert('Branding Updated!');
-        }
-
-        function saveLeadership() {
-            let data = JSON.parse(localStorage.getItem('rexoData')) || {};
-            data.leadership = {
-                leader: { name: document.getElementById('l-name').value, uid: document.getElementById('l-uid').value, dm: document.getElementById('l-dm').value },
-                acting: { name: document.getElementById('a-name').value, uid: document.getElementById('a-uid').value, dm: document.getElementById('a-dm').value },
-                elder: { name: document.getElementById('e-name').value, uid: document.getElementById('e-uid').value, dm: document.getElementById('e-dm').value }
             };
-            localStorage.setItem('rexoData', JSON.stringify(data));
-            alert('Leadership Info Saved!');
+
+            localStorage.setItem('rexoData', JSON.stringify(currentData));
+            alert("Website details updated successfully!");
         }
 
-        function saveRoster() {
-            let data = JSON.parse(localStorage.getItem('rexoData')) || {};
-            
-            fullRosterData.forEach((p, index) => {
-                const nameEl = document.getElementById(`r-name-${index}`);
-                const uidEl = document.getElementById(`r-uid-${index}`);
-                if(nameEl && uidEl) {
-                    fullRosterData[index].name = nameEl.value;
-                    fullRosterData[index].uid = uidEl.value;
-                }
+        function renderLogs() {
+            const logs = JSON.parse(localStorage.getItem('rexoLogs')) || [];
+            const tbody = document.getElementById('logs-table-body');
+            tbody.innerHTML = '';
+
+            if(logs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#64748b;">No join requests found yet.</td></tr>`;
+                return;
+            }
+
+            logs.forEach(log => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td style="color:#64748b;">${log.date}</td>
+                        <td style="color:#fff; font-weight:600;">${log.name}</td>
+                        <td style="color:#00f0ff;">${log.uid}</td>
+                        <td>${log.email}</td>
+                        <td style="color:#ff00f0;">${log.insta || 'N/A'}</td>
+                        <td><code>${log.ip}</code></td>
+                        <td style="color:#94a3b8;">${log.isp}</td>
+                    </tr>
+                `;
             });
-
-            data.roster = fullRosterData;
-            localStorage.setItem('rexoData', JSON.stringify(data));
-            alert('Roster Changes Saved!');
         }
+
+        function clearLogs() {
+            if(confirm("Are you sure you want to clear all join request logs?")) {
+                localStorage.removeItem('rexoLogs');
+                renderLogs();
+            }
+        }
+
+        loadCurrentAdminData();
     </script>
 </body>
 </html>

@@ -3,125 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEAM REXO | Admin Control Panel</title>
+    <title>TEAM REXO | Admin Portal</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        body { background-color: #060709; color: #f1f5f9; padding: 20px; font-size: 0.88rem; }
-        
-        .admin-card {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 25px;
-            max-width: 1000px;
-            margin: 0 auto 30px auto;
+        body { background-color: #060709; color: #f1f5f9; min-height: 100vh; overflow-x: hidden; font-size: 0.88rem; }
+
+        /* Extreme Liquid Background Animated Blobs */
+        .liquid-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(120px); animation: liquidMove 12s infinite alternate ease-in-out; }
+        .blob-1 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 240, 255, 0.45) 0%, rgba(0,0,0,0) 70%); top: -100px; left: -100px; }
+        .blob-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(112, 0, 255, 0.5) 0%, rgba(0,0,0,0) 70%); bottom: -120px; right: -100px; animation-delay: -4s; }
+
+        @keyframes liquidMove {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 80px) scale(1.15); }
         }
 
-        h2 { font-family: 'Rajdhani', sans-serif; color: #00f0ff; letter-spacing: 1px; margin-bottom: 15px; font-size: 1.5rem; }
-        h3 { font-family: 'Rajdhani', sans-serif; color: #7000ff; margin-top: 15px; margin-bottom: 10px; font-size: 1.2rem; }
+        /* Glassmorphism Styling */
+        .extreme-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        /* Login Screen Modal */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            display: flex; justify-content: center; align-items: center; z-index: 3000;
+            background: rgba(6, 7, 9, 0.9);
+        }
+        .login-box { width: 90%; max-width: 380px; padding: 30px; text-align: center; }
+
+        /* Dashboard Container */
+        #dashboard { display: none; padding: 20px; max-width: 1100px; margin: 0 auto; }
+
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; margin-bottom: 25px; }
+        h2 { font-family: 'Rajdhani', sans-serif; color: #00f0ff; letter-spacing: 1.5px; font-size: 1.6rem; }
+        h3 { font-family: 'Rajdhani', sans-serif; color: #7000ff; margin-top: 15px; margin-bottom: 12px; font-size: 1.15rem; }
+
+        .admin-card { padding: 25px; margin-bottom: 25px; }
 
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 15px; }
         input {
             width: 100%;
-            padding: 9px 12px;
-            background: rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 6px;
+            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             color: #fff;
             font-size: 0.85rem;
+            transition: 0.3s;
         }
-        input:focus { outline: none; border-color: #00f0ff; }
+        input:focus { outline: none; border-color: #00f0ff; box-shadow: 0 0 10px rgba(0,240,255,0.3); }
 
         .btn {
-            padding: 9px 18px;
+            padding: 10px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             background: linear-gradient(135deg, #00f0ff, #7000ff);
             color: #fff;
             font-family: 'Rajdhani', sans-serif;
             font-weight: 700;
             cursor: pointer;
             letter-spacing: 1px;
-            transition: 0.2s;
+            transition: all 0.25s ease;
         }
-        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(112,0,255,0.6); }
         .btn-danger { background: linear-gradient(135deg, #ff0055, #990000); }
 
-        /* Table Styling */
+        /* Logs Table */
         table { width: 100%; border-collapse: collapse; margin-top: 15px; text-align: left; }
-        th, td { padding: 10px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.8rem; }
+        th, td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 0.8rem; }
         th { color: #00f0ff; font-family: 'Rajdhani', sans-serif; font-size: 0.95rem; }
         tr:hover { background: rgba(255,255,255,0.02); }
     </style>
 </head>
 <body>
-
-    <!-- Site Management -->
-    <div class="admin-card">
-        <h2>⚡ TEAM REXO ADMIN CONTROL PANEL</h2>
-        
-        <h3>1. Update Logo & Group Link</h3>
-        <div class="form-grid">
-            <input type="text" id="cfg-logo" placeholder="Logo Image URL">
-            <input type="text" id="cfg-group" placeholder="Instagram Group Link">
-        </div>
-
-        <h3>2. Guild Leadership Links</h3>
-        <p style="color:#64748b; margin-bottom:8px; font-size:0.75rem;">Leader Details</p>
-        <div class="form-grid">
-            <input type="text" id="lead-name" placeholder="Leader Name">
-            <input type="text" id="lead-uid" placeholder="Leader UID">
-            <input type="text" id="lead-dm" placeholder="Leader Insta DM Link">
-        </div>
-
-        <p style="color:#64748b; margin-bottom:8px; font-size:0.75rem;">Acting Leader Details</p>
-        <div class="form-grid">
-            <input type="text" id="act-name" placeholder="Acting Name">
-            <input type="text" id="act-uid" placeholder="Acting UID">
-            <input type="text" id="act-dm" placeholder="Acting Insta DM Link">
-        </div>
-
-        <p style="color:#64748b; margin-bottom:8px; font-size:0.75rem;">Officer / Elder Details</p>
-        <div class="form-grid">
-            <input type="text" id="eld-name" placeholder="Elder Name">
-            <input type="text" id="eld-uid" placeholder="Elder UID">
-            <input type="text" id="eld-dm" placeholder="Elder Insta DM Link">
-        </div>
-
-        <button class="btn" onclick="saveAdminData()">SAVE WEBSITE CHANGES</button>
+    <div class="liquid-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
     </div>
 
-    <!-- Application Logs & Visitor Tracking -->
-    <div class="admin-card">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h2>📋 JOIN APPLICATIONS & VISITOR LOGS</h2>
-            <button class="btn btn-danger" onclick="clearLogs()">CLEAR ALL LOGS</button>
+    <!-- Login Screen -->
+    <div id="login-screen">
+        <div class="login-box extreme-glass">
+            <h2 style="margin-bottom: 10px;">ADMIN LOGIN</h2>
+            <p style="color: #64748b; margin-bottom: 20px; font-size: 0.8rem;">Protected Security Area</p>
+            <input type="password" id="adminPass" placeholder="Enter Admin Password" style="margin-bottom: 15px;">
+            <button class="btn" style="width: 100%;" onclick="login()">LOGIN</button>
+            <p id="loginErr" style="color: #ff0055; margin-top: 10px; display: none; font-size: 0.75rem;">Incorrect Password!</p>
+        </div>
+    </div>
+
+    <!-- Protected Dashboard -->
+    <div id="dashboard">
+        <header class="extreme-glass">
+            <h2>TEAM REXO CONTROL PANEL</h2>
+            <button class="btn btn-danger" onclick="logout()">LOGOUT</button>
+        </header>
+
+        <!-- Site Data Customization -->
+        <div class="admin-card extreme-glass">
+            <h3>1. Update Logo & Group Link</h3>
+            <div class="form-grid">
+                <input type="text" id="cfg-logo" placeholder="Logo Image URL">
+                <input type="text" id="cfg-group" placeholder="Instagram Group Link">
+            </div>
+
+            <h3>2. Guild Leadership Details</h3>
+            <p style="color:#64748b; font-size:0.75rem; margin-bottom: 5px;">Leader</p>
+            <div class="form-grid">
+                <input type="text" id="lead-name" placeholder="Leader Name">
+                <input type="text" id="lead-uid" placeholder="Leader UID">
+                <input type="text" id="lead-dm" placeholder="Insta DM Link">
+            </div>
+
+            <p style="color:#64748b; font-size:0.75rem; margin-bottom: 5px;">Acting Leader</p>
+            <div class="form-grid">
+                <input type="text" id="act-name" placeholder="Acting Name">
+                <input type="text" id="act-uid" placeholder="Acting UID">
+                <input type="text" id="act-dm" placeholder="Insta DM Link">
+            </div>
+
+            <p style="color:#64748b; font-size:0.75rem; margin-bottom: 5px;">Elder / Officer</p>
+            <div class="form-grid">
+                <input type="text" id="eld-name" placeholder="Elder Name">
+                <input type="text" id="eld-uid" placeholder="Elder UID">
+                <input type="text" id="eld-dm" placeholder="Insta DM Link">
+            </div>
+
+            <button class="btn" onclick="saveAdminData()">SAVE WEBSITE CHANGES</button>
         </div>
 
-        <div style="overflow-x: auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Date/Time</th>
-                        <th>Player Name</th>
-                        <th>FF UID</th>
-                        <th>Email</th>
-                        <th>Instagram Handle</th>
-                        <th>IP Address</th>
-                        <th>ISP/Network</th>
-                    </tr>
-                </thead>
-                <tbody id="logs-table-body">
-                    <!-- Logs injected via JS -->
-                </tbody>
-            </table>
+        <!-- Join Requests Table -->
+        <div class="admin-card extreme-glass">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>📋 JOIN REQUESTS & VISITOR LOGS</h3>
+                <button class="btn btn-danger" style="font-size: 0.75rem; padding: 6px 12px;" onclick="clearLogs()">CLEAR LOGS</button>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Player Name</th>
+                            <th>FF UID</th>
+                            <th>Email</th>
+                            <th>Instagram Handle</th>
+                            <th>IP Address</th>
+                            <th>ISP/Network</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logs-table-body">
+                        <!-- Loaded Dynamically -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
     <script>
+        const SECRET_PASS = "rexo123"; // 👈 നിങ്ങളുടെ പാസ്‌വേഡ് ഇവിടെ മാറ്റാം
+
+        function checkAuth() {
+            if(sessionStorage.getItem('rexoAdminAuth') === 'true') {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                loadCurrentAdminData();
+            }
+        }
+
+        function login() {
+            const input = document.getElementById('adminPass').value;
+            if(input === SECRET_PASS) {
+                sessionStorage.setItem('rexoAdminAuth', 'true');
+                document.getElementById('loginErr').style.display = 'none';
+                checkAuth();
+            } else {
+                document.getElementById('loginErr').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('rexoAdminAuth');
+            location.reload();
+        }
+
         function loadCurrentAdminData() {
             const data = JSON.parse(localStorage.getItem('rexoData')) || {};
             if(data.logo) document.getElementById('cfg-logo').value = data.logo;
@@ -151,25 +224,13 @@
             currentData.instaGroup = document.getElementById('cfg-group').value;
 
             currentData.leadership = {
-                leader: {
-                    name: document.getElementById('lead-name').value,
-                    uid: document.getElementById('lead-uid').value,
-                    dm: document.getElementById('lead-dm').value
-                },
-                acting: {
-                    name: document.getElementById('act-name').value,
-                    uid: document.getElementById('act-uid').value,
-                    dm: document.getElementById('act-dm').value
-                },
-                elder: {
-                    name: document.getElementById('eld-name').value,
-                    uid: document.getElementById('eld-uid').value,
-                    dm: document.getElementById('eld-dm').value
-                }
+                leader: { name: document.getElementById('lead-name').value, uid: document.getElementById('lead-uid').value, dm: document.getElementById('lead-dm').value },
+                acting: { name: document.getElementById('act-name').value, uid: document.getElementById('act-uid').value, dm: document.getElementById('act-dm').value },
+                elder: { name: document.getElementById('eld-name').value, uid: document.getElementById('eld-uid').value, dm: document.getElementById('eld-dm').value }
             };
 
             localStorage.setItem('rexoData', JSON.stringify(currentData));
-            alert("Website details updated successfully!");
+            alert("Settings updated successfully!");
         }
 
         function renderLogs() {
@@ -178,7 +239,7 @@
             tbody.innerHTML = '';
 
             if(logs.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#64748b;">No join requests found yet.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#64748b;">No join requests found.</td></tr>`;
                 return;
             }
 
@@ -198,13 +259,13 @@
         }
 
         function clearLogs() {
-            if(confirm("Are you sure you want to clear all join request logs?")) {
+            if(confirm("Clear all logs?")) {
                 localStorage.removeItem('rexoLogs');
                 renderLogs();
             }
         }
 
-        loadCurrentAdminData();
+        checkAuth();
     </script>
 </body>
 </html>
